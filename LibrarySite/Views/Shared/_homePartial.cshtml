@@ -1,0 +1,37 @@
+﻿<!--Home Start-->
+    <section id="home" class="home container-fluid p-0">
+        <div class="row hero" style="direction:ltr">
+            <div class="col pl-5 ml-sm-5 p-0">
+                <h1 class="text1">مدیریت کتابخانه</h1>
+                <h3 class="text2">خرید و امانت کتاب</h3>
+            </div>
+        </div>
+
+        <div class="counting">
+            <div class="box">
+            <h1 class="count" data-count="@ViewBag.BooksCount"></h1>
+                <h3>تعداد کل کتابها</h3>
+            </div>
+
+            <div class="box">
+            <h1 class="count" data-count="@ViewBag.ActiveUsersCount"></h1>
+                <h3>تعداد کاربران فعال</h3>
+            </div>
+
+            <div class="box">
+            <h1 class="count" data-count="@ViewBag.ElmiBooksCount"></h1>
+                <h3>تعداد کتابهای علمی</h3>
+            </div>
+
+            <div class="box">
+            <h1 class="count" data-count="@ViewBag.RavanBooksCount"></h1>
+                <h3> تعداد کتابهای روانشناسی</h3>
+            </div>   
+ @*           
+            <div class="box">
+            <h1 class="count" data-count="100">+100</h1>
+                <h3> تعداد کتابهای به امانت گرفته شده</h3>
+            </div>*@
+        </div>
+    </section>
+    <!--Home End-->

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<ManageRequestViewModel>
+
+@{
+    ViewData["Title"] = "لیست درخواستها";
+    int counter = 1;
+
+}
+
+<style>
+    tr:hover td {
+        background-color: #dcd6d6;
+    }
+</style>
+
+<div class="content">
+
+    <form asp-controller="BookGroup" asp-action="SearchBookGroup">
+        <div class="panel panel-heading col-md-12 col-xs-12"
+             style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+
+            <span style="font-weight:bold;" class="col-md-6 col-xs-12">
+                <i class="icon-user"></i>
+                لیست درخواستها
+            </span>
+        </div>
+
+        <div class="panel col-md-12" style="border: 1px solid gray; background-color: #D4EFDF; text-align: center; padding: 10px 6px 5px 6px; border-radius: 2px; margin-bottom: 20px;">
+
+            <span style="margin-bottom:5px;">جستجوی محتوا :</span>
+
+            <input type="text" placeholder="جستجو ..." id="mySearch"
+                   style="border:1px solid gray; width:300px; height:28px; margin-bottom:5px; text-align:center; font-weight:bold;" />
+        </div>
+    </form>
+
+    <div>
+        <div class="table-responsive"
+             style=" overflow:auto; border:1px solid gray; border-radius:2px; box-shadow:3px 3px 1px 0 gray;">
+            <table class="table table-bordered" style="background-color:white;">
+                <thead>
+                    <tr style="font-size:14px; font-weight:bold; background-color:#D0ECE7;">
+                        <td>ردیف</td>
+                        <td>نام کتاب</td>
+                        <td>مبلغ (ریال)</td>
+                        <td>وضعیت</td>
+                        <td>تاریخ درخواست</td>
+                        <td>تاریخ پاسخ</td>
+                        <td>تاریخ برگشت</td>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    @foreach (var item in Model)
+                    {
+                        <tr style="font-size:12px;">
+                            <td style="width:60px; text-align:center;">@counter</td>
+                            <td>@item.BookName</td>
+                            <td>@item.Price</td>
+                            @if (item.Status == 1)
+                            {
+                                <td style="width:35px; color:black;">
+                                    <span class="badge badge-warning" style="width:100%; border-radius:15px;">
+                                        @item.StatusDescription
+                                    </span>
+                                </td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td style="width:35px; color:black;">
+                                    <span class="badge badge-info" style="width:100%; border-radius:15px;">
+                                        @item.StatusDescription
+                                    </span>
+                                </td>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <td style="width:35px; color:black;">
+                                    <span class="badge badge-danger" style="width:100%; border-radius:15px;">
+                                        @item.StatusDescription
+                                    </span>
+                                </td>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <td style="width:35px; color:black;">
+                                    <span class="badge badge-success" style="width:100%; border-radius:15px;">
+                                        @item.StatusDescription
+                                    </span>
+                                </td>
+                            }
+                            <td>@ConvertDateTime.ConvertMiladiToShamsi(item.RequestDate,"yyyy/MM/dd")</td>
+                            <td>@(item.Status != 1 ? @ConvertDateTime.ConvertMiladiToShamsi(item.AnswereDate, "yyyy/MM/dd") : "")</td>
+                            <td>@(item.Status != 1 && item.Status != 2 && item.Status != 3 ? @ConvertDateTime.ConvertMiladiToShamsi(item.GiveBackDate, "yyyy/MM/dd") : "")</td>
+
+                        </tr>
+                        counter++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<partial name="_userHomePaging" />
+
+
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", Size = BootstrapModel.ModalSize.Medium })
+
+@section UserScripts{
+    <script src="~/js/modal/modal.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#mySearch").on("keyup", function () {
+                var value = $(this).val().toLowerCase();//حروف بزرگ و کوچیک
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

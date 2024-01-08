@@ -1,0 +1,100 @@
+﻿@model EntityLayer.Entities.ApplicationUsers
+
+
+@{
+    ViewData["Title"] = "مشخصات کاربر";
+}
+
+
+<div class="content">
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;background-color:#1ABC9C">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-user"></i>
+            مشخصات کاربر
+        </span>
+    </div>
+
+    <div class="panel panel-body container-fluid"
+         style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#D0ECE7;">
+
+        <div style="margin-bottom:10px;">
+            <div class="col-md-3 col-xs-12">
+
+
+                <div>
+                    <span style="font-weight:bold">نام : </span>
+                    <span style="color:darkgreen;">@Model.FirstName</span>
+                </div>
+                <br />
+                <div>
+                    <span style="font-weight:bold">فامیلی : </span>
+                    <span style="color:darkgreen;">@Model.LastName</span>
+                </div>
+                <br />
+                <div>
+                    <span style="font-weight:bold">نام کاربری : </span>
+                    <span style="color:darkgreen;">@Model.UserName</span>
+                </div>
+                <br />
+                <div>
+                    <span style="font-weight:bold">کدملی : </span>
+                    <span style="color:darkgreen;">@Model.NationalCode</span>
+                </div>
+                <br />
+                <div>
+                    <span style="font-weight:bold">ایمیل : </span>
+                    <span style="color:darkgreen;">@Model.Email</span>
+                </div>
+                <br />
+                <div>
+                    <span style="font-weight:bold">تحصیلات : </span>
+                    <span style="color:darkgreen;">@(Model.Education == 1 ? "زیر دیپلم" : Model.Education == 2 ? "دیپلم": Model.Education == 3 ? "کاردانی" : Model.Education == 4 ? "کارشناسی" : Model.Education == 5 ? "کارشناسی ارشد" : Model.Education == 6 ? "دکتری" : "")</span>
+                </div>
+                <br />
+                <div>
+                    <span style="font-weight:bold">وضعیت : </span>
+                    @if (Model.IsActive == true)
+                    {
+
+                        <span style="color:darkgreen;">فعال</span>
+                    }
+                    else
+                    {
+                        <span style="color:red;">غیرفعال</span>
+                    }
+                </div>
+                <br />
+                <div>
+                    <span style="font-weight:bold">جنسیت : </span>
+                    @if (Model.Gender == 1)
+                    {
+                        <span style="color:darkgreen;">مرد </span>
+                    }
+                    else
+                    {
+                        <span style="color:darkgreen;">زن</span>
+                    }
+                </div>
+                <br />
+
+                <div>
+                    <span style="font-weight:bold">آدرس : </span>
+                    <span style="color:darkgreen;">@Model.Address</span>
+                </div>
+
+
+
+            </div>
+
+            <hr style="height:1px; background-color:gray; margin-top:10px;" class="col-md-12 col-xs-12 row" />
+
+
+            <div class="col-xs-12 form-group" style="margin-top:15px;">
+
+                <a asp-controller="UserManage" asp-action="Index" class="btn btn-primary pull-right"
+                   style="border:1px solid gray; border-radius:3px; color:black; margin-left:10px; width:70px;">بازگشت</a>
+            </div>
+        </div>
+
+    </div>
+</div>

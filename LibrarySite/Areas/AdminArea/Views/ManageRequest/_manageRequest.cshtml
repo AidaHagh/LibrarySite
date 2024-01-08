@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ManageRequestViewModel>
+
+@if (ViewBag.PartialTyp == 1)
+{
+    <form asp-controller="ManageRequest" asp-action="RejectRquestPost" method="post">
+        <div class="modal-header" style="background-color:firebrick; color:white; border-radius:5px 5px 0 0;">
+            <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">رد درخواست امانت</h4>
+        </div>
+
+        <input Id="Id" name="Id" value="@ViewBag.rejectId" hidden />
+
+        @foreach (var item in Model)
+        {
+            <div class="modal-body form-horizontal">
+                آیا از رد درخواست کاربر با نام <span style="font-weight:bold;">@item.UserFullName</span> برای کتاب <span style="font-weight:bold;">@item.BookName</span> مطمین هستید ؟
+            </div>
+
+        }
+
+
+        <div class="modal-footer" style="text-align:left;">
+            <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">بازگشت</button>
+            <button type="submit" class="btn" style="width:80px; color:white; background-color:firebrick;">
+                تایید
+            </button>
+        </div>
+
+    </form>
+}
+else if (ViewBag.PartialTyp == 2)
+{
+    <form asp-controller="ManageRequest" asp-action="AcceptRquestPost" method="post">
+        <div class="modal-header" style="background-color:green; color:white; border-radius:5px 5px 0 0;">
+            <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">پذیرفتن درخواست امانت</h4>
+        </div>
+
+        <input Id="Id" name="Id" value="@ViewBag.acceptmyId" hidden />
+
+        @foreach (var item in Model)
+        {
+            <div class="modal-body form-horizontal">
+                آیا از پذیرفتن درخواست کاربر با نام <span style="font-weight:bold;">@item.UserFullName</span> برای کتاب <span style="font-weight:bold;">@item.BookName</span> مطمین هستید ؟
+            </div>
+        }
+
+
+        <div class="modal-footer" style="text-align:left;">
+            <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">بازگشت</button>
+            <button type="submit" class="btn" style="width:80px; color:white; background-color:green;">
+                تایید
+            </button>
+        </div>
+
+    </form>
+}
+else if (ViewBag.PartialTyp == 3)
+{
+    <form asp-controller="ManageRequest" asp-action="BackBookPost" method="post">
+        <div class="modal-header" style="background-color:darkblue; color:white; border-radius:5px 5px 0 0;">
+            <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">برگشت کتاب</h4>
+        </div>
+
+        <input Id="Id" name="Id" value="@ViewBag.backId" hidden />
+
+        @foreach (var item in Model)
+        {
+            <div class="modal-body form-horizontal">
+                آیا از برگشت کتاب با نام <span style="font-weight:bold;">@item.UserFullName</span> مربوط به کتاب <span style="font-weight:bold;">@item.BookName</span> مطمین هستید ؟
+            </div>
+        }
+
+
+        <div class="modal-footer" style="text-align:left;">
+            <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">بازگشت</button>
+            <button type="submit" class="btn" style="width:80px; color:white; background-color:darkblue;">
+                تایید
+            </button>
+        </div>
+
+    </form>
+}

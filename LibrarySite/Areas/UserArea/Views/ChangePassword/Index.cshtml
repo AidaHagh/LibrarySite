@@ -1,0 +1,73 @@
+﻿@model ChangePasswordViewModel
+
+@{
+    ViewData["Title"] = "تغییر کلمه عبور";
+}
+
+<style>
+    .custominput {
+        border: 1px solid gray;
+        border-radius: 1px;
+        height: 30px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="content">
+
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="fa fa-key">
+
+            </i>
+            فرم تغییر رمز عبور
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius: 2px; box-shadow: 3px 1px 1px 0 gray; background-color:#D0ECE7;">
+        <form asp-controller="ChangePassword" asp-action="Changing" method="post">
+            <div class="col-md-6 col-md-offset-3">
+                <!--OldPassword-->
+                <div>
+                    <label asp-for="OldPassword" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="OldPassword" autocomplete="off" type="password" class="form-control custominput" placeholder="رمز عبور قدیمی" />
+                        <span asp-validation-for="OldPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--NewPassword-->
+                <div>
+                    <label asp-for="NewPassword" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="NewPassword" autocomplete="off" type="password" class="form-control custominput" placeholder="رمز عبور جدید" />
+                        <span asp-validation-for="NewPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--ConfirmPassord-->
+                <div>
+                    <label asp-for="ConfirmNewPassword" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ConfirmNewPassword" autocomplete="off" type="password" class="form-control custominput" placeholder="تکرار رمز عبور" />
+                        <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            @if (ViewBag.msg != null)
+            {
+                <div class="alert @ViewBag.alt col-xs-12 col-md-12" style="text-align:center;">
+                    @ViewBag.msg
+                </div>
+            }
+
+
+            <div class="col-xs-12 form-group" style="margin-top:15px;">
+                <input type="submit" style="border:1px solid gray; border-radius:3px;" value="تغییر رمز عبور" class="btn form-group pull-right" />
+            </div>
+        </form>
+    </div>
+
+</div>

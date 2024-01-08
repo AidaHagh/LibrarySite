@@ -1,0 +1,53 @@
+﻿
+@{ 
+    ViewData["Title"] = "Payment";
+
+	int ToataAmount =ViewBag.totalamount;
+}
+<body style="background:url('@Url.Content("~/images/background.jpg")');background-repeat:no-repeat;height:auto;background-size:cover;background-position:center;background-attachment:fixed;margin-top:30px">
+	<div class="alert alert-success form-horizontal">
+            <div style="font-size:20px;text-align:center">&#10004; عملیات پرداخت با موفقیت انجام شد و حساب شما شارژ گردید</div>
+        </div>
+<div class="col-md-8 col-md-offset-2 col-xs-12">
+	<div class="panel panel-body container-fluid col-md-12"
+		 style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#e7e1e1;">
+
+		<div class="table-responsive" style="border:1px solid gray; border-radius:2px; box-shadow:3px 3px 3px 0 gray;">
+			<table class="table table-bordered" style="background-color:whitesmoke;">
+				<thead>
+					<tr style="font-size: 11px; font-weight: bold; background-color: #d6d6db;">
+					</tr>
+				</thead>
+				<tbody>
+					 <tr>
+                        <td>مبلغ تراکنش</td>
+                        <td>@ToataAmount.ToString("###,###")</td>
+                    </tr>
+					 <tr>
+                        <td>شماره پیگیری</td>
+                        <td>@ViewBag.transactionNo</td>
+                    </tr>
+					<tr>
+						<td>تاریخ و زمان تراکنش</td>
+						<td>@ConvertDateTime.ConvertMiladiToShamsi(DateTime.Now,"HH:mm  yyyy,MM,dd")</td>
+					</tr>
+					
+					<tr>
+						<td>توضیحات</td>
+						<td>شارژ کیف پول</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+
+	</div>
+	<div class="col-md-12" style="text-align:center;">
+        <a style="border:1px solid gray; border-radius:3px; width:120px; background-color:#ddd; color:black;"
+           class="btn " asp-controller="Payment" asp-action="Payment">
+            برگشت
+        </a>
+    </div>
+</div>
+
+</body>

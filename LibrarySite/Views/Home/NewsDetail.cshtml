@@ -1,0 +1,49 @@
+﻿@model News
+@{
+    ViewData["Title"] = "";
+
+}
+
+<body style="background:url('@Url.Content("~/images/background.jpg")');background-repeat:no-repeat;height:auto;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container py-2 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-12 col-xl-12">
+              
+                <div class="card shadow-2-strong card-registration" style="border-radius:15px;">
+                 
+                    <div class="card-body p-5 p-md-10" style="background-color:#D0ECE7">
+                        <a asp-area="" asp-controller="Home" asp-action="Index"  style=";">
+                            <i class="fa fa-remove" style="float:left;font-weight:bold;color:#525256;font-size:22px;margin-top: -22px"></i>
+                        </a>
+                        <br />
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center alert-warning">جزییات خبر</h3>
+                        <form class="row">
+                            <div class="col-md-9">
+                                <div class="col-md-12">
+                                    <span style="font-weight:bold">عنوان خبر : </span>
+                                    <span style="color:darkgreen;">@Model.NewsTitle</span>
+                                </div>
+                                <br />
+                                <div class="col-md-12">
+                                    <span style="font-weight:bold">تاریخ انتشار خبر : </span>
+                                    <span style="color:darkgreen;">@ConvertDateTime.ConvertMiladiToShamsi(DateTime.Now,"yyyy/MM/dd")</span>
+                                </div>
+                                <br />
+                                <div class="col-md-12">
+                                    <span style="font-weight:bold">متن خبر : </span>
+                                    <span style="color:darkgreen;">@Html.Raw(Model.NewsContent)</span>
+                                </div>
+                                <br />
+
+                            </div>
+                            <div class="col-md-3">
+                                <img src="/upload/news/@Model.NewsAttachment" style="max-width:90%;" />
+                            </div>
+                        </form>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

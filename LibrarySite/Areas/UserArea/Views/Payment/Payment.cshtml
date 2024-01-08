@@ -1,0 +1,63 @@
+﻿@model PaymentTransaction
+
+@{
+   ViewData["Title"] = "شارژ کیف پول";
+}
+
+<div class="content">
+
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;background-color: #73C6B6">
+        <span style="font-weight:bold;">
+            <i class="fa fa-align-left"></i>
+            فرم شارژ کیف پول
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#D0ECE7">
+
+        <form asp-controller="Payment" asp-action="Payment" method="post">
+            <div class="col-md-6 col-md-offset-3">
+                <!--Amount-->
+                <div>
+                    <label asp-for="Amount" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Amount" type="number" class="form-control custominput" placeholder="مبلغ..." autocomplete="off" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <!--Email-->
+                <div>
+                    <label asp-for="Email" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Email" value="@ViewBag.Email" readonly type="email" class="form-control custominput" placeholder="ایمیل..." autocomplete="off" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--Mobile-->
+                <div>
+                    <label asp-for="Mobile" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Mobile" value="@ViewBag.Mobile" readonly type="tel" class="form-control custominput" placeholder="شماره تماس..." autocomplete="off" />
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="پرداخت" class="btn customGreen1 pull-right" />
+
+                    <a asp-controller="UserHome" asp-action="Index" style="border:1px solid gray; border-radius:3px; margin-left:20px"
+                       value="برگشت" class="btn btn-primary pull-right">بازگشت</a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

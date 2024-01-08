@@ -1,0 +1,89 @@
+﻿<div class="sidebar sidebar-main" style="background-color:#2C3E50">
+    <div class="sidebar-content">
+
+        <!-- START - User menu -->
+        <div class="sidebar-user">
+            <div class="category-content">
+                <div class="media">
+                    <a href="#" class="media-left">
+                    </a>
+                    <div class="media-body" style="color:white">
+                        <span class="media-heading text-semibold">@ViewBag.fullname (@ViewBag.phone)</span>
+                        <div class="text-size-mini text-muted" style="color:white">
+                            <i class="icon-pin text-size-small"></i> &nbsp; پنل ادمین
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END - User menu -->
+        <!-- START - Main navigation -->
+        <div class="sidebar-category sidebar-category-visible">
+            <div class="category-content no-padding">
+
+                <!-- START - Item Navigation -->
+                <ul class="navigation navigation-main" style="color:white;">
+
+                    <!-- START - Item Navigation Header -->
+                    <li class="navigation-header" >
+                        <span style="color:white"> داشبورد اختصاصی کاربران</span> <i class="icon-menu" style="color:white"
+                                                                 title="صفحه اصلی"></i>
+                    </li>
+                    <li class="active">
+                        <a asp-controller="Dashboard" asp-action="Index">
+                            <i class="icon-home4" style="color:#1ABC9C"></i>
+                            <span style="color:white">پیشخوان</span>
+                        </a>
+                    </li>
+                    <li>
+                    </li>
+
+                    <li>
+                        <a asp-controller="UserManage" asp-action="Index"><i class="icon-users" style="color:#1ABC9C"></i><span style="color:white">مدیریت کاربران</span></a>
+                    </li>
+                     <li>
+                        <a asp-controller="News" asp-action="Index"><i class="glyphicon glyphicon-list-alt" style="color:#1ABC9C"></i><span style="color:white">اخبار و اطلاعیه ها</span></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Group" asp-action="Index"><i class="glyphicon glyphicon-align-right" style="color:#1ABC9C"></i><span style="color:white">دسته بندی کتابها</span></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Author" asp-action="Index"><i class="glyphicon glyphicon-edit" style="color:#1ABC9C"></i><span style="color:white">نویسندگان و مولفین</span></a>
+                    </li>
+                    <li>
+                        <a asp-controller="Book" asp-action="Index"><i class="glyphicon glyphicon-book" style="color:#1ABC9C"></i><span style="color:white">مدیریت کتابها</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-forward3" style="color:#1ABC9C"></i><span style="color:white">مدیریت درخواستها</span></a>
+                        <ul>
+                            <li>
+                                <a asp-controller="ManageRequest" asp-action="Index"><i class="icon-forward2"></i><span>درخواستها</span></a>
+                            </li>
+
+                            <li>
+                               <a asp-controller="ManageTrasaction" asp-action="Index"><i class="icon-bag"></i><span>تراکنش های مالی</span></a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-notebook"></i><span>کتاب</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-repo-forked"></i><span>کتاب</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a asp-controller="ChangePassAdmin" asp-action="Index"><i class="icon-key" style="color:#1ABC9C"></i><span style="color:white">تغییر کلمه عبور</span></a>
+                    </li>
+                   
+                   
+                </ul>
+                <!-- END - Item Navigation -->
+
+            </div>
+        </div>
+        <!-- END - Main navigation -->
+
+    </div>
+</div>

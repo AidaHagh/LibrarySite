@@ -1,0 +1,14 @@
+﻿@using LibrarySite
+@using LibrarySite.Models
+@using DataLayer.ViewModels
+@using CommonLayer.StaticClass
+@using CommonLayer.ModalClass
+@using CommonLayer.GenericClass
+@using EntityLayer.Entities
+@using Microsoft.AspNetCore.Identity
+@using static CommonLayer.StaticClass.StaticValue;
+
+@inject SignInManager<ApplicationUsers> signInManager
+@inject UserManager<ApplicationUsers> userManager
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

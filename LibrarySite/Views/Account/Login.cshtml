@@ -1,0 +1,104 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "صفحه وورد";
+}
+
+<body style="background:url('@Url.Content("~/images/background.jpg")');background-repeat:no-repeat;height:auto;background-size:cover;background-position:center;background-attachment:fixed;margin-top:100px">
+
+
+<div class="container panel panel-body col-md-7 col-xs-12 login-container" style="margin:0 auto;text-align:center; background-color:white;
+    border-radius:5px; box-shadow:6px 6px 3px 0 #2C3E50;margin-top:50px;background-color:#73C6B6;">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/images/logo.jpg" style="width:100px;border-radius: 50%; height:100px;margin-top:5px" />
+
+
+            <div class="col-xs-12 col-md-12 alert" style="text-align: center; background-color: #D0ECE7;height:50px;margin-top:5px">
+                <span style="font-size:18px;font-weight:bold;line-height:6px">سیستم مدیریت کتابخانه</span>
+            </div>
+
+            <hr style="height:1px; background-color:gray; width:100%;" />
+
+            <form asp-controller="Account" asp-action="Login" method="post" style="margin-top:30px;">
+               <!--نام کاربری یا شماره موبایل-->
+            <div class="form-group col-xs-12 col-md-12">
+                <div class="input-group">
+                    <i class="fas fa-user" style="font-size:25px; width:30px; color:#2e4469;
+                        padding-top:6px; padding-left:1px; padding-right:1px; margin-left:0px; border:1px solid #2e4469;
+                        border-radius:0 5px 5px 0;"></i>
+
+                    <input asp-for="UserName" type="text" class="form-control" autocomplete="off" style="text-align:center;
+                     border-radius:5px 0 0 5px;" placeholder="شماره همراه" />
+                </div>
+
+                <span asp-validation-for="UserName" class="text-danger" style="font-weight:bold;"></span>
+            </div>
+
+            <!--رمز عبور-->
+            <div class="form-group col-xs-12 col-md-12">
+                <div class="input-group">
+                    <i class="fas fa-lock" style="font-size:25px; width:30px; color:#2e4469;
+                        padding-top:6px; padding-left:1px; padding-right:1px; margin-left:0px; border:1px solid #2e4469;
+                        border-radius:0 5px 5px 0;"></i>
+
+                    <input asp-for="Password" type="password" class="form-control" autocomplete="off" style="text-align:center;
+                     border-radius:5px 0 0 5px;" placeholder="کلمه عبور" />
+                </div>
+
+                <span asp-validation-for="Password" class="text-danger" style="font-weight:bold;"></span>
+            </div>
+
+
+
+                <div class="form-group col-xs-12 login-form-1">
+                    <div>
+                        <input type="submit" class="btn btn-success center-block" style="font-weight:bold" value="ورود به سامانه" />
+                    </div>
+                    <div style="margin-top:4px;font-size:13px;margin-top:20px">
+                        <a asp-action="Forget" style="font-weight:bold;color: #808B96">فراموشی کلمه عبور</a>
+                    </div>
+                    <br />
+
+                    <div style="border:2px solid transparent; border-radius:6px; padding:10px; background-color: #D0ECE7">
+                        <span>شماره پشتیبانی : 09167194055</span>
+                        <br />
+                        <a style="text-decoration:none;">ایمیل : farhad.fr@outlook.com</a>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-md-6" style="text-align: right; color: #5D6D7E; background-color:#D0ECE7">
+            <h3 style="color: #5D6D7E; font-size:20px;font-weight:bold;margin-top:50px"> <i class="fa fa-desktop"></i> نکات امنیتی </h3>
+            <hr style="height:1px; background-color:gray; width:100%;" />
+
+            <form>
+                <i class="fa fa-globe"></i>
+                <span style="font-size:16px">آدرس هایی غیر از URL اصلی نامعتبر می باشد</span>
+                <br /><br />
+                <i class="fa fa-lock"></i>
+                <span style="font-size:16px">مطمین شوید که وب سایت از رمزنگاری استفاده میکند</span>
+                <br /><br />
+                <i class="fa fa-power-off"></i>
+                <span style="font-size:16px">پس از انجام کار حتما از سیستم خارج شوید</span>
+                <br /><br />
+                <i class="fa fa-desktop"></i>
+                <span style="font-size:16px">همواره از نرم افزارهای آنتی ویروس بروز استفاده شود</span>
+                <br /><br />
+                <i class="fa fa-exclamation-triangle"></i>
+                <span style="font-size:16px">کاربر گرامی، به منظور حفظ امنیت از استفاده همزمان از فیلترشکن خودداری نمایید</span>
+                 <br /><br />
+                <i class="fa fa-envelope"></i>
+                <span style="font-size:16px">این سیستم هرگز اطلاعات محرمانه شما را از طریق ایمیل درخواست نمی کند</span>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+

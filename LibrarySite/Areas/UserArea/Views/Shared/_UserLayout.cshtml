@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <!-- START - MetaTags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="fa">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>پنل کاربری - سیستم اتوماسیون اداری تحت وب</title>
+    <!-- END - MetaTags -->
+    <!-- START - stylesheets -->
+    <link href="~/Panel/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/Panel/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Panel/assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="~/Panel/assets/css/components.css" rel="stylesheet" type="text/css">
+
+   <!--my css-->
+   <link rel="stylesheet" href="~/css/customstyle.css" />
+
+   <!--PersianDateTimePicker-->
+    <link href="~/lib/MdPersiandatetimepicker/css/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" />
+     <!--Notify-->
+    <link rel="stylesheet" href="~/css/notifications.css">
+
+</head>
+<body class="navbar-top">
+    <!-- START - Main Navibar -->
+    <partial name="_navbarPartial" />
+    <!-- END - Main Navibar -->
+    <!-- START - Main Content -->
+    <div class="page-container">
+
+        <!-- START - Page Content -->
+        <div class="page-content">
+
+            <!-- START - Main Sidebar -->
+            <partial name="_sidebarPartial" />
+            <!-- END - Main Sidebar -->
+            <!-- START - Main Content -->
+            <div class="content-wrapper">
+
+                <!-- START - View header -->
+                <partial name="_headerPartial" />
+                <!-- END - View header -->
+                <!-- Content area -->
+                <div class="content">
+
+                    <!-- START - View Content -->
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                    <!-- END - View Content -->
+
+
+                </div>
+                <!-- /content area -->
+                <!-- Footer -->
+
+                <div class="breadcrumb-line" style="background-color:#e0dbdb; border-top:1px solid gray; text-align:center; bottom:1px !important; position:fixed; width:100%;">
+                    <div class="col-md-offset-2 col-md-6">
+                        <span style="color: black;"> سیستم اتوماسیون اداری تحت وب - کلیه حقوق مادی و معنوی این نرم افزار محفوظ می باشد </span>
+                    </div>
+                </div>
+
+                <!-- /footer -->
+            </div>
+            <!-- END - Main Content -->
+
+        </div>
+        <!-- END - Page Content -->
+
+    </div>
+    <!-- END - Main Content -->
+    <!--Top Loading-->
+    <script type="text/javascript" src="~/Panel/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/core/app.js"></script>
+    <!--Notify-->
+    <script src="~/js/notifications.js"></script>
+    <script src="~/js/custom.js"></script>
+    <!-- END - theme JS files -->
+    @RenderSection("UserScripts",required:false)
+
+    <partial name="_SiteMessages"/>
+
+</body>
+
+</html>

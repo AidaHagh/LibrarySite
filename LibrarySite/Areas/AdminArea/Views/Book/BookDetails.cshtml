@@ -1,0 +1,139 @@
+﻿@{
+    ViewData["Title"] = "BookDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body style="background:url('@Url.Content("~/images/background.jpg")');background-repeat:no-repeat;height:auto;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container py-2 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-12 col-xl-12" style="padding: 51px;">
+
+                <div class="card shadow-2-strong card-registration" style="border-radius: 5px;padding: 8px;">
+
+                    <div class="card-body p-5 p-md-10" style="background-color:#D0ECE7;border-radius: 5px;">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" style=";">
+                            <i class="fa fa-remove" style="float:left;font-weight:bold;color:#525256;font-size:22px;margin-top: -22px"></i>
+                        </a>
+                        <br />
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center " style="background-color:#1ABC9C;padding:5px;">مشخصات کتاب</h3>
+                        <form class="row">
+                            <div class="col-md-6">
+                                <div>
+                                    <span style="font-weight:bold">نام کتاب : </span>
+                                    <span style="color:darkgreen;">@Model.BookName</span>
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight:bold">تعداد صفحات : </span>
+                                    <span style="color:darkgreen;">@Model.BookPageCount</span>
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight:bold">قیمت کتاب : </span>
+                                    <span style="color:darkgreen;">@Model.Price</span>
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight:bold">نویسنده : </span>
+                                    <span style="color:darkgreen;">@Model.Author.AuthorName</span>
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight:bold">دسته بندی : </span>
+                                    <span style="color:darkgreen;">@Model.Group.GroupName</span>
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight:bold">تعداد بازدید : </span>
+                                    <span style="color:darkgreen;">@Model.BookViews</span>
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight:bold">موجودی کتاب : </span>
+                                    <span style="color:darkgreen;">@Model.BookStock</span>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="col-md-4">
+                                <div>
+                                    <span style="font-weight:bold" class="col-md-4">تصویر : </span>
+                                    <div class="col-md-8" style="margin-bottom:15px">
+                                        <img src="~/upload/book/@Model.BookImage" style="max-width:100%;border:1px sol gray;border-radius:5px" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+
+                                @if (signInManager.IsSignedIn(User))
+                                {
+                                    <div class="alert alert-secondary col-md-12 col-xs-12">
+                                        @Html.Partial("_sabadAmanat")
+                                    </div>
+                                }
+
+                                <br />
+
+                                @if (signInManager.IsSignedIn(User))
+                                {
+                                    <a id="btnbookborrow" class="btn btn-success" style="margin-left:3px;">امانت</a>
+                                }
+
+
+                                <span class="col-md-offset-1"></span>
+                                <div class="float-start">
+                                    <a asp-controller="Book" asp-action="Like" asp-route-Bookid="@Model.BookId" class="btn btn-success"><i class="fa fa-thumbs-up"></i></a>
+                                    <span>@Model.BookLikeCount</span>
+                                    <a asp-controller="Book" asp-action="DisLike" asp-route-Bookid="@Model.BookId" class="btn btn-danger"><i class="fa fa-thumbs-down"></i></a>
+                                    <span id="bid" hidden>@Model.BookId</span>
+                                </div>
+
+                            </div>
+
+                            <hr style="height:1px; background-color:gray; margin-top:10px;" class="col-md-12 col-xs-12 row" />
+
+                            <div class="col-md-12">
+                                <span style="font-weight:bold">توضیحات کتاب : </span>
+                                <span>@Html.Raw(Model.BookDescription)</span>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+@section Scripts{
+
+    <script>
+
+        $('#btnbookborrow').on("click", function () {
+            var post_data = $('#bid').text();
+
+            $.ajax({
+
+                type: "POST",
+                url: '@Url.Action("Borrow", "Book")',
+                data: { 'Id': post_data },
+
+                success: function (msg) {
+                    if (msg.status === 'success') {
+                        alert(msg.message);
+                        $('#requestcount').text(msg.sabadcount);
+                    }
+                    else {
+                        alert(msg.message);
+
+                    }
+                }
+            });
+        });
+
+    </script>
+
+} 

@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Book>
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpCookie
+
+@{
+    ViewData["Title"] = "محتوای کتاب";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand"><img style="height:40px;width:40;border-radius:45px" src="~/images/logo.jpg" alt="">سیستم مدیریت کتابخانه</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">صفحه اصلی <span class="sr-only">(current)</span></a>
+            </li>
+     @*       <li class="nav-item active">
+                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">ثبت نام</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">ورود</a>
+            </li>*@
+        </ul>
+    </div>
+</nav>
+
+<body style="background:url('@Url.Content("~/images/background.jpg")');background-repeat:no-repeat;height:auto;background-size:cover;background-position:center;background-attachment:fixed;">
+    <div class="container py-2 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-12 col-xl-12">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div id="cart" class="card-body p-5 p-md-10" style="background-color:#D0ECE7">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center alert-warning">لیست کتابهای درخواستی</h3>
+                        <form id="remove" class="row">
+
+                            @if (HttpCookie.HttpContext.Request.Cookies["_brbook"] != null )
+                            {
+                                <hr style="height:1px;width:100%;background-color:black" />
+                                <div class="panel panel-body container-fluid"
+                                     style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#D0ECE7;">
+                                    <table class="table table-border table-striped table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>ردیف</th>
+                                                <th class="col-md-2">شماره کتاب</th>
+                                                <th class="col-md-4">نام کتاب</th>
+                                                <th class="col-md-3">بهای امانت</th>
+                                                <th class="col-md-3">عملیات</th>
+                                                <th class="col-md-3">وضعیت</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @{
+                                                int counter = 1;
+
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <th>@(counter++)</th>
+                                                        <td>@item.BookId</td>
+                                                        <td>@item.BookName</td>
+                                                        <td>@item.Price</td>
+                                                        <td>
+                                                            <a asp-area="AdminArea" asp-controller="Book" asp-action="DeleterequestedBook" asp-route-BookId="@item.BookId" style="color:brown"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+
+                                    </table>
+
+                                    @*محاسبه مجموع فیلدهای جدول*@
+                                    <hr style="border:1px solid gray" />
+
+                                    <div style="font-size:16px">
+                                        @{
+                                            int TotalPrice = Model.Sum(a => a.Price);
+                                        }
+                                        مجموع بهای امانت : <span style="color:darkgreen" id="totalprice">@TotalPrice</span> تومان
+                                    </div>
+                                </div>
+
+
+                                <div style="text-align:center;margin-top:40px;">
+                                    <a id="btnsabtrequest" class="btn btn-success" style="width:120px;">ثبت درخواست</a>
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger" style="width:120px;">بازگشت</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="font-size:22px;text-align:center;color:red">
+                                    شما هیچ کتابی انتخاب نکرده اید
+                                </div>
+                            }
+
+                            <span hidden id="spnuserid">@userManager.GetUserId(User)</span>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section scripts{
+
+    <script>
+
+        $('#btnsabtrequest').on("click", function () {
+
+            var userid = $('#spnuserid').text();
+
+            var tp = $('#totalprice').text();
+
+            $.ajax({
+
+                type: "POST",
+                url: '@Url.Action("BookrequestFinally","Book")',
+                data: { 'userid': userid, 'tp': tp },
+
+                success: function (msg) {
+                    if (msg.status === 'success') {
+                        alert(msg.message);
+                        window.location.href = '@Url.Action("Index","Home",new { area = "" })';
+                    }
+                    else if (msg.status === 'fail') {
+                        alert(msg.message);
+
+                        window.location.href = '@Url.Action("Payment", "Payment", new { area = "UserArea" })';
+                    }
+                }
+            })
+
+        });
+
+    </script>
+
+
+
+    }
+

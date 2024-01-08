@@ -1,0 +1,51 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpCookie
+<!--یک متغیر از کلاسIHttpContextAccessor برای دسترسی کوکی ها -->
+@{
+
+    if (HttpCookie.HttpContext.Request.Cookies["_brbook"] != null)//اگر کوکی وجود داشت محتوایتش را بدست بیاور
+    {
+        string cookeieContent = HttpCookie.HttpContext.Request.Cookies["_brbook"].ToString();
+        String[] requestbookCount = cookeieContent.Split(',');//محتوای کوکی را میگیرد و جدا میکند
+        requestbookCount = requestbookCount.Where(r => r != "").ToArray();//تعداد کوکی را بدست آورده و آنرا داخل آرایه میریزد
+
+        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+            <div id="sabadamanat" style="float:left;">
+
+                <div style="font-size:13px;font-weight:bold;color:#808B96">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span>
+                        تعداد کتابهای سفارش داده شده : <span id="requestcount" style="color:white;font-size:13px"
+                                                             class="badge badge-pill badge-success">@requestbookCount.Count()</span>
+                    </span>
+                </div>
+
+
+                <div style="font-size:13px;font-weight:bold;color:#808B96">
+                    <a asp-area="AdminArea" asp-controller="Book" asp-action="RequestedBook">مشاهده لیست کتابهای درخواستی </a>
+                </div>
+
+            </div>
+        </div>
+    }
+    else //اگر کوکی وجود نداشت عدد صفر را بنویسد
+    {
+        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+            <div id="sabadamanat">
+
+                <div style="font-size:13px;font-weight:bold;color:#808B96">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span>
+                        تعداد کتابهای سفارش داده شده : <span id="requestcount" style="color:white;font-size:13px"
+                                                             class="badge badge-pill badge-success">0</span>
+                    </span>
+                </div>
+
+                <div style="font-size:13px;font-weight:bold;color:#808B96">
+                    <a asp-area="AdminArea" asp-controller="Book" asp-action="RequestedBook">مشاهده لیست کتابهای درخواستی</a>
+                </div>
+
+            </div>
+        </div>
+    }
+
+}

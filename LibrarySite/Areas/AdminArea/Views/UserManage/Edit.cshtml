@@ -1,0 +1,128 @@
+﻿@model DataLayer.ViewModels.EditUserViewModel
+
+@{
+    ViewData["Title"] = "ویرایش اطلاعات";
+
+    EducationTypeModel Edu = new EducationTypeModel();
+    List<EducationTypeModel> ListEDU = Edu.GetCustomeType();
+}
+
+<div class="content">
+
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;background-color:#1ABC9C">
+        <span style="font-weight:bold;color:white">
+            <i class="glyphicon glyphicon-edit"></i>
+            فرم ویرایش کاربر
+        </span>
+    </div>
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;  background-color:#D0ECE7;">
+        <form asp-controller="UserManage" asp-action="Edit" method="post">
+
+            <div class="col-md-6 col-xs-12">
+
+                <input asp-for="Id" class="hidden" />
+
+                <!--نام-->
+                <div>
+                    <label asp-for="FirstName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="FirstName" type="text" class="form-control custominput" autocomplete="off" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--نام خانوادگی-->
+                <div>
+                    <label asp-for="LastName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--کد ملی-->
+                <div>
+                    <label asp-for="NationalCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="NationalCode" type="text" class="form-control custominput" autocomplete="off" />
+                        <span asp-validation-for="NationalCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--ایمیل-->
+                <div>
+                    <label asp-for="Email" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Email" type="text" class="form-control custominput" autocomplete="off" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--gender-->
+                <div>
+                    <label asp-for="Gender" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <label class="col-md-3 col-xs-6">
+                            <input asp-for="Gender" type="radio" name="Gender" value="1" checked />
+                            مرد
+                        </label>
+                        <label class="col-md-3 col-xs-6">
+                            <input asp-for="Gender" type="radio" name="Gender" value="2" />
+                            زن
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+
+                <!--Address-->
+                <div>
+                    <label asp-for="Address" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <textarea asp-for="Address" type="text" class="form-control custominput" autocomplete="off">
+                        </textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--تحصیلات-->
+                <div>
+                    <label asp-for="Education" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-items="@(new SelectList(ListEDU,"Id","Title"))" asp-for="Education"
+                                class="form-control custominput"></select>
+                        <span asp-validation-for="Education" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--نام کاربری-->
+                <div>
+                    <label asp-for="UserName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="UserName" type="text" class="form-control custominput " readonly>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="ویرایش اطلاعات" class="btn btn-success pull-right" />
+
+                    <a asp-controller="UserManage" asp-action="Index" style="border:1px solid gray; border-radius:3px; margin-left:20px"
+                       value="برگشت" class="btn btn-primary pull-right">بازگشت</a>
+
+                </div>
+
+
+
+            </div>
+
+        </form>
+    </div>
+
+
+</div>

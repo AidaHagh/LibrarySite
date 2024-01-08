@@ -1,0 +1,206 @@
+﻿@model DataLayer.ViewModels.BookViewModel
+@{
+    ViewData["Title"] = "ویرایش کتاب";
+}
+
+
+<div class="content">
+
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;background-color: #73C6B6">
+        <span style="font-weight:bold;">
+            <i class="fa fa-align-left"></i>
+            فرم ویرایش کتاب
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#D0ECE7">
+
+        <form asp-controller="Book" asp-action="Edit" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-xs-12">
+                <input asp-for="BookId" class="hidden" />
+
+                <!--Name-->
+                <div>
+                    <label asp-for="BookName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="BookName" type="text" class="form-control custominput" placeholder="نام کتاب ..." autocomplete="off" />
+                        <span asp-validation-for="BookName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--BookGroup-->
+                <div>
+                    <label asp-for="GroupId" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="GroupId" style="border:1px solid gray; margin-bottom:5px;" class="form-control custominput"
+                                asp-items="@ViewBag.Group">
+                        </select>
+                    </div>
+                </div>
+
+                <!--Author-->
+                <div>
+                    <label asp-for="AuthorId" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="AuthorId" style="border:1px solid gray; margin-bottom:5px;" class="form-control custominput"
+                                asp-items="@ViewBag.Author">
+                        </select>
+                    </div>
+                </div>
+
+                <!--BookPageCount-->
+                <div>
+                    <label asp-for="BookPageCount" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="BookPageCount" type="number" class="form-control custominput" autocomplete="off" />
+                        @*<span asp-validation-for="BookPageCount" class="text-danger"></span>*@
+                    </div>
+                </div>
+
+                <!--Price-->
+                <div>
+                    <label asp-for="Price" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Price" type="number" class="form-control custominput" autocomplete="off" />
+                        @*<span asp-validation-for="Price" class="text-danger"></span>*@
+                    </div>
+                </div>
+
+                <!--BookStock-->
+                <div>
+                    <label asp-for="BookStock" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="BookStock" type="number" class="form-control custominput" autocomplete="off" />
+                        <span asp-validation-for="BookStock" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+       
+ 
+
+    <div class="col-md-6 col-xs-12">
+        <!--BookImage-->
+        <div>
+            <label asp-for="BookImage" class="control-label col-md-3 col-xs-12"></label>
+            <div class="col-md-12 col-xs-12">
+                <div class="col-md-6">
+                    <div class="form-horizontal">
+
+                        <label for="BookImage" class="btn" style="width:145px; height:30px; margin-bottom:5px; border-radius:3px;
+                                        border:1px solid gray;">
+                            انتخاب تصویر کتاب
+                            <i class="icon-file-picture"></i>
+                        </label>
+                        <input asp-for="BookImage" type="file" accept=".jpg, .png, .tif, .tiff, .jpeg" style="visibility:hidden" />
+                        <span id="spnimagebook" style="color:black; font-size:12px;"></span>
+
+                        <!--نام جدید تصویر-->
+                        <input id="newImagePathName" name="newImagePathName" value="@Model.BookImage" hidden />
+
+                        <input type="button" value="آپلود و نمایش تصویر" id="btnupload" onclick="UploadImage()" class="btn"
+                               style="height:30px; border-radius:3px; border:1px solid gray; width:145px; margin-bottom:10px;" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <img id="imgbookimage" src="~/upload/book/@Model.BookImage"
+                         style="height:110px; width:110px; margin:5px auto; border:1px solid gray; background-size:100%; width:100%; height:100%" />
+                    <span asp-validation-for="BookImage" class="text-danger"></span>
+                    <div id="divmessage" class="text-center hidden"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="col-md-12 col-xs-12">
+        <!--BookDescription-->
+        <div>
+            <label asp-for="BookDescription" class="control-label col-md-12 col-xs-12"></label>
+            <div class="col-md-12 col-xs-12">
+                <textarea id="BookDescription" name="BookDescription" asp-for="BookDescription" class="form-control custominput"></textarea>
+                <span asp-validation-for="BookDescription" class="text-danger"></span>
+                <script src="~/lib/ckeditor/ckeditor.js"></script>
+                <script type="text/javascript">
+                    CKEDITOR.replace('BookDescription')
+                </script>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 form-group" style="margin-top:15px;">
+
+        <input type="submit" style="border:1px solid gray; border-radius:3px;"
+               value="ثبت اطلاعات" class="btn customGreen1 pull-right" />
+
+        <a asp-controller="Book" asp-action="Index" style="border:1px solid gray; border-radius:3px; margin-left:20px"
+           value="برگشت" class="btn customRed1 pull-right">بازگشت</a>
+
+    </div>
+
+    </form>
+</div>
+
+</div>
+
+
+
+@section AdminScripts{
+    <script>
+        $("#BookImage").change(function () {
+
+            var filename = this.files[0].name;
+            $("#spnimagebook").html(filename);
+        });
+
+    </script>
+
+    <script>
+        var UploadImage = function () {
+
+            var data = new FormData;
+            var file = $("#BookImage").get(0);
+            var files = file.files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray', files[i]);
+            }
+            data.append('path', "upload\\book\\");
+
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("UploadImageFile","Book", new { area = "AdminArea"})',
+                data: data,
+                contentType: false,
+                processData: false
+
+            }).done(function (result) {
+                if (result.status == "success") {
+                    $("#imgbookimage").attr('src', "\\upload\\book\\" + result.imagename);
+                    $("#divmessage").text("آپلود موفقیت آمیز بود.");
+                    $("#divmessage").css("color", "green");
+                    $("#divmessage").removeClass("hidden");
+                    $("#newImagePathName").val(result.imagename);
+                }
+
+            }).fail(function (result) {
+                if (result.status != "success") {
+                    $("#divmessage").css("color", "red");
+                    $("#divmessage").removeClass("hidden");
+                    $("#divmessage").text("در حین آپلود اشکالی بوجود آمد.");
+                }
+            });
+
+        }
+    </script>
+
+}

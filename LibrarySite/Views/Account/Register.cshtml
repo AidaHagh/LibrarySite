@@ -1,0 +1,165 @@
+﻿
+@model DataLayer.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "درخواست عضویت";
+
+    EducationTypeModel Edu = new EducationTypeModel();
+    List<EducationTypeModel> ListEDU = Edu.GetCustomeType();
+}
+
+
+<body style="background:url('@Url.Content("~/images/background.jpg")');background-repeat:no-repeat;height:auto;background-size:cover;background-position:center;background-attachment:fixed;margin-top:30px">
+
+    <div class="panel panel-body col-md-6 col-xs-12" style="margin:0 auto; text-align:center; background-color:#73C6B6;
+        border-radius:5px; box-shadow:6px 6px 3px 0 gray;">
+        <div class="modal-body">
+
+            <div>
+                <img src="~/images/logo.jpg" style="width:80px; height:80px;border-radius:45%; margin-bottom:6px;" />
+            </div>
+            <div style="text-align:center; font-weight:bold;">
+                فرم درخواست عضویت کتابخانه عمومی
+            </div>
+
+            <hr style="height:1px; width:100%; background-color:gray;" />
+
+            <div class="col-md-12 col-xs-12 alert" style="text-align:center; background-color:#D0ECE7;">
+                <span>
+                    سیستم مدیریت کتابخانه
+                </span>
+            </div>
+
+
+            <form asp-controller="Account" asp-action="Register" method="post">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <!--نام-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+                                <input type="text" asp-for="FirstName" class="form-control custominput" autocomplete="off" style=" border-radius:5px 0 0 5px;" placeholder="نام" />
+                            </div>
+
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <!--نام خانوادگی-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+                                <input asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" style=" border-radius:5px 0 0 5px;" placeholder="نام خانوادگی" />
+                            </div>
+
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <!--کد ملی-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+                                <input asp-for="NationalCode" type="text" class="form-control custominput" autocomplete="off" style=" border-radius:5px 0 0 5px;" placeholder="کد ملی" />
+                            </div>
+
+                            <span asp-validation-for="NationalCode" class="text-danger"></span>
+                        </div>
+
+                        <!--ایمیل-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+                                <i class="fas fa-envelope" style="font-size: 25px; padding-top: 6px; padding-left: 1px; padding-right: 1px; margin-left: 0px; border: 1px solid #ced4da; border-radius: 0 5px 5px 0; color: #5D6D7E;background-color: white;"></i>
+                                <input asp-for="Email" type="text" class="form-control custominput" autocomplete="off" style=" border-radius:5px 0 0 5px;" placeholder="ایمیل" />
+                            </div>
+
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+
+                        <!--جنسیت-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+
+                                <label class="col-md-4 col-xs-6">
+                                    <input  asp-for="Gender" type="radio" name="r1" value="1" checked />
+                                    مرد
+                                </label>
+                                <label class="col-md-4 col-xs-6">
+                                    <input  asp-for="Gender" type="radio" name="r1" value="2" />
+                                    زن
+                                </label>
+                            </div>
+
+                            <span class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="col-md-6 col-xs-12">
+                        <!--تحصیلات-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+
+                                <select asp-items="@(new SelectList(ListEDU,"Id","Title"))" asp-for="Education"
+                                        class="form-control"></select>
+                            </div>
+
+                            <span asp-validation-for="Education" class="text-danger"></span>
+                        </div>
+
+
+                        <!--نام کاربری-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+
+                                <input asp-for="UserName" type="text" class="form-control custominput" autocomplete="off" style="border-radius:5px 0 0 5px;" placeholder=" شماره همراه" />
+                            </div>
+
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <!--آدرس-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+                                <textarea asp-for="Address" class="form-control custominput" autocomplete="off" style=" border-radius:5px 0 0 5px;" placeholder="آدرس محل سکونت"></textarea>
+                            </div>
+
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+
+                        <!-- رمز عبور-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+
+                                <input asp-for="Password" type="password" class="form-control custominput" autocomplete="off" style="border-radius:5px 0 0 5px;" placeholder="کلمه عبور" />
+                            </div>
+
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+
+                        <!--تکرار رمز عبور-->
+                        <div class="form-group col-xs-12 col-md-12">
+                            <div class="input-group">
+
+                                <input asp-for="ConfirmPassword" type="password" class="form-control custominput" autocomplete="off" style="border-radius:5px 0 0 5px;" placeholder="تکرار کلمه عبور" />
+                            </div>
+
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-xs-12">
+                        <div>
+                            <input type="submit" class="btn btn-success center-block" value="ثبت نام" />
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+
+

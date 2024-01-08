@@ -1,0 +1,55 @@
+﻿@model DataLayer.ViewModels.AuthorViewModel
+@{
+    ViewData["Title"] = "ثبت نویسنده";
+}
+
+
+<div class="content">
+
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;background-color: #73C6B6">
+        <span style="font-weight:bold;">
+            <i class="fa fa-align-left"></i>
+            فرم ثبت نویسنده 
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#D0ECE7">
+
+        <form asp-controller="Author" asp-action="Create" method="post">
+            <div class="col-md-6 col-md-offset-3">
+                <!--CategoryBookName-->
+                <div>
+                    <label asp-for="AuthorName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="AuthorName" type="text" class="form-control custominput" placeholder="نویسنده..." autocomplete="off" />
+                        <span asp-validation-for="AuthorName" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <!--Description-->
+                <div>
+                    <label asp-for="Description" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <textarea asp-for="Description" type="text" class="form-control custominput" placeholder="توضیحات..." autocomplete="off"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="ثبت اطلاعات" class="btn customGreen1 pull-right" />
+
+                    <a asp-controller="Author" asp-action="Index" style="border:1px solid gray; border-radius:3px; margin-left:20px"
+                       value="برگشت" class="btn btn-primary pull-right">بازگشت</a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

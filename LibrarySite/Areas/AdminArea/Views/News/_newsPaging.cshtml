@@ -1,0 +1,41 @@
+﻿@* Paging *@
+
+@if (ViewBag.PageCount > 1)
+{
+
+    <div class="row text-center">
+        <nav>
+            <ul class="pagination">
+                @if ((int)ViewBag.Page > 1)
+                {
+                    @* Previous *@
+                    <li>
+                        <a asp-controller="News" asp-action="Index" asp-route-Page="@((int)ViewBag.Page) - 1">
+                            <span>&laquo;</span>
+                        </a>
+                    </li>
+                }
+                @for (int i = 1; i <= (ViewBag.PageCount); i++)
+                {
+                    <li class="@(((int)ViewBag.Page==i)?" active":"")">
+                        <a asp-controller="News" asp-action="Index" asp-route-page="@i">
+                            @i
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                }
+                @if ((int)ViewBag.Page <= (int)ViewBag.PageCount - 1)
+                {
+                    @* Next *@
+                    <li>
+                        <a asp-controller="News" asp-action="Index" asp-route-Page="@((int)ViewBag.Page) + 1">
+                            <span>&raquo;</span>
+                        </a>
+                    </li>
+
+                }
+            </ul>
+        </nav>
+    </div>
+
+}

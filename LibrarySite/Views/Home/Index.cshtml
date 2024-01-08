@@ -1,0 +1,20 @@
+﻿@model DaynamicSiteViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@Html.Partial("_headerPartial")
+
+@Html.Partial("_homePartial")
+
+@Html.Partial("_aboutPartial")
+
+
+<partial name="_lastbookPartial" , model="Model.LastBook"/>
+
+<partial name="_newsPartial" , model="Model.LastNews" />
+
+@*@Html.Partial("_newsPartial")*@
+
+@Html.Partial("_footerPartial")

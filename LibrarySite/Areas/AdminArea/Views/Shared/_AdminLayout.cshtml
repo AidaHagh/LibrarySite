@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <!-- START - MetaTags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="fa">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>پنل کاربری - سامانه مدیریت کتابخانه</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <!-- END - MetaTags -->
+    <!-- START - stylesheets -->
+    <link href="~/Panel/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/Panel/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Panel/assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="~/Panel/assets/css/components.css" rel="stylesheet" type="text/css">
+    <!--CkEditor Style-->
+    <link href="~/lib/ckeditor/prism_1.0.1/prism/lib/prism/prism_patched.min.css" rel="stylesheet" />
+
+   <!--my css-->
+   <link rel="stylesheet" href="~/css/customstyle.css" />
+
+   <!--PersianDateTimePicker-->
+    <link href="~/lib/MdPersiandatetimepicker/css/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" />
+     <!--Notify-->
+    <link rel="stylesheet" href="~/css/notifications.css">
+    <!--CkEditor-->
+    <link href="~/lib/ckeditor/prism_1.0.1/prism/lib/prism/prism_patched.min.css" rel="stylesheet" />
+     <!--LightBox Plugin-->
+    <link href="~/lib/LightBox/css/lightbox.css" rel="stylesheet" />
+</head>
+
+<body class="navbar-top" style="background:#e8eaec;">
+    <!-- START - Main Navibar -->
+    <partial name="_navbarPartial" />
+    <!-- END - Main Navibar -->
+    <!-- START - Main Content -->
+    <div class="page-container">
+
+        <!-- START - Page Content -->
+        <div class="page-content">
+
+            <!-- START - Main Sidebar -->
+
+            <partial name="_sidebarPartial"/>
+
+            <!-- END - Main Sidebar -->
+            <!-- START - Main Content -->
+            <div class="content-wrapper">
+
+                <!-- START - View header -->
+                <partial name="_headerPartial" />
+                <!-- END - View header -->
+                <!-- Content area -->
+                <div class="content">
+
+                    <!-- START - View Content -->
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                    <!-- END - View Content -->
+
+                </div>
+                <!-- /content area -->
+                <!-- Footer -->
+
+                <div class="breadcrumb-line" style="background-color:#e0dbdb; border-top:1px solid gray; text-align:center; bottom:1px !important; position:fixed; width:100%;">
+                    <div class="col-md-offset-2 col-md-6">
+                        <span style="color: black;"> سیستم مدیریت کتابخانه - کلیه حقوق مادی و معنوی این نرم افزار محفوظ می باشد </span>
+                    </div>
+                </div>
+
+                <!-- /footer -->
+            </div>
+            <!-- END - Main Content -->
+
+        </div>
+        <!-- END - Page Content -->
+
+    </div>
+    <!-- END - Main Content -->
+    <!--Top Loading-->
+    <script type="text/javascript" src="~/Panel/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="~/Panel/assets/js/core/app.js"></script>
+    <!--CkEditor Jquery-->
+    <script src="~/lib/ckeditor/prism_1.0.1/prism/lib/prism/prism_patched.min.js"></script>
+     <!--PersianDateTimePicker-->
+    <script src="~/lib/MdPersiandatetimepicker/js/calendar.js"></script>
+    <script src="~/lib/MdPersiandatetimepicker/js/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+    <!--Notify-->
+    <script src="~/js/notifications.js"></script>
+    <script src="~/js/custom.js"></script>
+    <!--CkEditor-->
+    <script src="~/lib/ckeditor/prism_1.0.1/prism/lib/prism/prism_patched.min.js"></script>
+    <!--LightBox Plugin-->
+    <script src="~/lib/LightBox/js/modernizr.custom.js"></script>
+    <script src="~/lib/LightBox/js/lightbox-2.6.min.js"></script>
+    <!-- END - theme JS files -->
+    @RenderSection("AdminScripts", required: false)
+
+    <partial name="_SiteMessages"/>
+</body>
+
+</html>

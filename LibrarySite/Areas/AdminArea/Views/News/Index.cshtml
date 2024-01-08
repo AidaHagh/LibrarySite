@@ -1,0 +1,133 @@
+﻿@model IEnumerable<EntityLayer.Entities.News>
+@{
+    ViewData["Title"] = "لیست اخبار و اطلاعیه ها";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+@{
+    int counter = 1;
+}
+
+<style>
+    tr:hover td {
+        background-color: #dcd6d6;
+    }
+</style>
+
+<div class="content">
+
+    <form asp-controller="News" asp-action="SearchNews">
+        <div class="panel panel-heading col-md-12 col-xs-12"
+             style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+
+            <span style="font-weight:bold;" class="col-md-6 col-xs-12">
+                <i class="icon-user"></i>
+                @ViewData["Title"] 
+            </span>
+        </div>
+
+        <div class="panel col-md-12 chearchStyle">
+            <span style="margin-bottom:5px;">جستجو بر اساس موضوع خبر :</span>
+
+            <input type="text" id="inputsearch" name="inputsearch" value="@ViewBag.inputsearch" class="inputSearch" />
+
+            <button type="submit">
+                جستجو
+                <i class="icon-search4"></i>
+            </button>
+
+        </div>
+    </form>
+
+    <div style="margin-bottom:5px;">
+        <a class="btn customGreen1" asp-controller="News" asp-action="Create">
+            <i class="glyphicon glyphicon-plus"></i>
+            افزودن خبر
+        </a>
+    </div>
+
+    <div>
+        <div class="table-responsive"
+             style=" overflow:auto; border:1px solid gray; border-radius:2px; box-shadow:3px 3px 1px 0 gray;">
+            <table class="table table-bordered" style="background-color:white;">
+                <thead>
+                    <tr style="font-size:14px; font-weight:bold; background-color:#D0ECE7;">
+                        <td>ردیف</td>
+                        <td>موضوع خبر</td>
+                        <td>تاریخ ارسال خبر</td>
+                        <td>متن اطلاعیه</td>
+                        <td>تصویر اطلاعیه</td>
+                        <td style="width:220px;">عملیات</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="font-size:12px;">
+                            <td style="width:60px; text-align:center;">@counter</td>
+                            <td style="text-align:right;">@item.NewsTitle</td>
+                            <td>@ConvertDateTime.ConvertMiladiToShamsi(item.NewsDate,"yyyy/MM/dd")</td>
+                            <td style="text-align:right">
+
+                                @if (item.NewsContent.Length > 100)
+                                {
+                                    @Html.Raw(item.NewsContent.Substring(0,100)) <span style="color:blue">(ادامه دارد...)</span>
+                                }
+                                else
+                                {
+                                    @item.NewsContent
+                                }
+                            </td>
+                            <td style="padding:2px;text-align:center">
+                                <img src="~/upload/news/@item.NewsAttachment" style="width:60px;height:65px;">
+                            </td>
+                            <td>
+                                <div class="row">
+
+                                    <a href="~/upload/news/@item.NewsAttachment" data-lightbox="mypic"
+                                       style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                       class="btn customBlue1">
+                                        <i class="glyphicon glyphicon-picture"></i>
+                                    </a>
+                                    <a asp-controller="News" asp-action="Edit" asp-route-id="@item.NewsId"
+                                       style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                       class="btn customBlue2" title="ویرایش">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </a>
+
+                                    <a asp-controller="News" asp-action="Delete" asp-route-newsId="@item.NewsId"
+                                       data-toggle="modal" data-target="#modal-action"
+                                       style="height:30px; width:40px; font-size:10px; margin-bottom:3px;"
+                                       class="btn customRed1">
+                                        <i class="glyphicon glyphicon-trash " title="حذف"></i>
+                                    </a>
+
+                                    <a asp-controller="News" asp-action="NewsDetails" asp-route-NewsId="@item.NewsId"
+                                       style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                       class="btn customGreen1" title="جزئیات اطلاعیه">
+                                        <i class="glyphicon glyphicon-book"></i>
+                                    </a>
+                                </div>
+
+                            </td>
+                        </tr>
+                        counter++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<partial name="_newsPaging" />
+
+
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", Size = BootstrapModel.ModalSize.Medium })
+
+@section AdminScripts{
+    <script src="~/js/modal/modal.js"></script>
+    }
+

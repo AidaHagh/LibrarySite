@@ -1,0 +1,35 @@
+﻿<!--News Start-->
+@model IEnumerable<EntityLayer.Entities.News>
+
+
+
+<section id="service" class="service">
+    <h1 class="heading">اخبار و اطلاعیه ها</h1>
+    <div class="box-container mx-auto">
+        @foreach (var item in Model)
+        {
+            <div class="box">
+                <img src="/upload/news/@item.NewsAttachment" style="border-radius:45px;height:50px;width:50px" />
+                <a style="text-decoration:none;" asp-controller="Home" asp-action="NewsDetail" asp-route-id="@item.NewsId"> <h5>@item.NewsTitle</h5></a>
+                <br>
+                <div>
+
+                    @if (item.NewsContent.Length > 110)
+                    {
+                        @Html.Raw(item.NewsContent.Substring(0,110))
+                        <a style=" text-decoration:none;color:darkblue;font-weight:bold;" class="btn btn-light" href="/Home/NewsDetail/@item.NewsId"> (ادامه دارد...) </a>
+                    }
+                    else
+                    {
+
+                        @Html.Raw(item.NewsContent)
+
+                    }
+                </div>
+            </div>
+        }
+
+    </div>
+
+</section>
+<!--News End-->

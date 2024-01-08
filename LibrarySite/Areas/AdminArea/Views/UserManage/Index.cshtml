@@ -1,0 +1,153 @@
+﻿@model IEnumerable<EntityLayer.Entities.ApplicationUsers>
+
+@{
+    ViewData["Title"] = "لیست کاربران";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+
+    int counter = 1;
+    UserSearchTypeModel USER = new UserSearchTypeModel();
+    USER.Id = ViewBag.searchTypeselected;
+    List<UserSearchTypeModel> UserListSearchTypeModel = USER.GetUserTypeModel();
+}
+
+<style>
+    tr:hover td {
+        background-color: #dcd6d6;
+    }
+</style>
+
+<div class="content">
+
+    <form asp-controller="UserManage" asp-action="SearchUser">
+        <div class="panel panel-heading col-md-12 col-xs-12"
+             style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+
+            <span style="font-weight:bold;" class="col-md-6 col-xs-12">
+                <i class="icon-user"></i>
+                لیست کاربران
+            </span>
+        </div>
+
+        <div class="panel col-md-12 chearchStyle">
+
+            <span style="margin-bottom:5px;">جستجو بر اساس :</span>
+            <select asp-for="@USER.Id" style="border:1px solid gray; margin-bottom:5px;" id="searchTypeselected" name="searchTypeselected"
+                    asp-items="@(new SelectList(UserListSearchTypeModel,"Id","Title"))">
+            </select>
+
+            <input type="text" d="inputsearch" name="inputsearch" value="@ViewBag.inputsearch" class="inputSearch" />
+
+            <button type="submit">
+                جستجو
+                <i class="icon-search4"></i>
+            </button>
+
+        </div>
+    </form>
+
+    <div>
+        <div class="table-responsive"
+             style=" overflow:auto; border:1px solid gray; border-radius:2px; box-shadow:3px 3px 1px 0 gray;">
+            <table class="table table-bordered" style="background-color:white;">
+                <thead>
+                    <tr style="font-size:14px; font-weight:bold; background-color:#D0ECE7;">
+                        <td>ردیف</td>
+                        <td>نام</td>
+                        <td>نام خانوادگی</td>
+                        <td>کد ملی</td>
+                        <td>ایمیل</td>
+@*                        <td>تحصیلات</td>*@
+                        <td>وضعیت</td>
+                        <td>نام کاربری</td>
+                        <td style="width:160px;text-align:center;">عملیات</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="font-size:12px;">
+                            <td style="width:60px; text-align:center;">@counter</td>
+                            <td style="text-align:right;">@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.NationalCode</td>
+                            <td>@item.Email</td>
+@*                            <td>@(item.Education == 1 ? "زیر دیپلم" : item.Education == 2 ? " دیپلم" : item.Education == 3 ? "کاردانی" : item.Education == 4 ? "کارشناسی" : item.Education == 5 ? "کارشناسی ارشد" : item.Education == 6 ? "دکتری" : "")</td>
+*@                            @if (item.IsActive == true)
+                            {
+                                <td style="width:35px; color:black;">
+                                    <span class="badge badge-success" style="width:50px; border-radius:15px;">
+                                        فعال
+                                    </span>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="width:35px; color:black;">
+                                    <span class="badge badge-danger" style="width:50px; border-radius:15px;">
+                                        غیرفعال
+                                    </span>
+                                </td>
+                            }
+                            <td>@item.UserName</td>
+                            <td >
+                                <div class="row">
+
+                                    <a asp-controller="UserManage" asp-action="UserDetail" asp-route-UserId="@item.Id"
+                                       style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                       class="btn customGreen1" title="مشخصات کاربر">
+                                        <i class="glyphicon glyphicon-book"></i>
+                                    </a>
+
+                                    @if (item.IsActive == true)
+                                    {
+                                        <a asp-controller="UserManage" asp-action="ActiveOrDeactiveUser" asp-route-userID="@item.Id"
+                                   asp-route-IsActive="@item.IsActive" data-toggle="modal" data-target="#modal-action"
+                                           style="height:30px; width:40px; font-size:10px; margin-bottom:3px;"
+                                           class="btn customYellow1 ">
+                                            <i class="glyphicon glyphicon-remove text-danger" title="غیرفعالسازی"></i>
+                                        </a>
+
+                                        <a asp-controller="UserManage" asp-action="Edit" asp-route-userId="@item.Id"
+                                           style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                           class="btn customBlue2 " title="ویرایش">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="UserManage" asp-action="ActiveOrDeactiveUser" asp-route-userID="@item.Id"
+                                   asp-route-IsActive="@item.IsActive" data-toggle="modal" data-target="#modal-action"
+                                           style="height:30px; width:40px; font-size:10px; margin-bottom:3px;"
+                                           class="btn customYellow1">
+                                            <i class="glyphicon glyphicon-ok text-success" title="فعالسازی"></i>
+                                        </a>
+                                    }
+
+                                    @* <a asp-controller=" UserManage" asp-action="ChangePasswordByAdmin"
+                                data-toggle="modal" data-target="#modal-action"
+                                style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                class="btn customGreen1">
+                                <i class="icon-key"></i>
+                                </a>*@
+                                </div>
+
+                            </td>
+                        </tr>
+                        counter++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<partial name="_userPaging" />
+
+
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", Size = BootstrapModel.ModalSize.Medium })
+
+@section AdminScripts{
+    <script src="~/js/modal/modal.js"></script>
+}

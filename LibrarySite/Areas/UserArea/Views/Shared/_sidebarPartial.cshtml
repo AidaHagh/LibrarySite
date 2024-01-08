@@ -1,0 +1,121 @@
+﻿<div class="sidebar sidebar-main" style="background-color:#2C3E50">
+    <div class="sidebar-content">
+
+        <!-- START - User menu -->
+        <div class="sidebar-user">
+            <div class="category-content">
+                <div class="media">
+                    <a href="#" class="media-left">
+                    </a>
+                    <div class="media-body">
+                        <span class="media-heading text-semibold" style="color:#fff">@ViewBag.fullname</span>
+                        <div class="text-size-mini text-muted" style="color:#fff">
+                            <i class="icon-mobile text-size-small" style="color:#fff"></i> (@ViewBag.phone)
+                        </div>
+                        <div class="text-size-mini text-muted" style="color:#fff">
+                            <i class="icon-bag text-size-small" style="color:#fff">
+                                <span>موجودی حساب : </span>
+                            </i> @ViewBag.Kifpul
+                            <span>تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END - User menu -->
+        <!-- START - Main navigation -->
+        <div class="sidebar-category sidebar-category-visible">
+            <div class="category-content no-padding">
+
+                <!-- START - Item Navigation -->
+                <ul class="navigation navigation-main" style="color:#1ABC9C">
+
+                    <!-- START - Item Navigation Header -->
+                    <li class="navigation-header">
+                        <span style="color:#fff"> داشبورد اختصاصی کاربران</span> <i class="icon-menu"
+                                                                 title="صفحه اصلی"></i>
+                    </li>
+                    <li class="active">
+                        <a asp-controller="UserHome" asp-action="Index">
+                            <i class="icon-home4" style="color:#1ABC9C"></i>
+                            <span style="color:#fff">پیشخوان</span>
+                        </a>
+                    </li>
+                    <li>
+                    </li>
+                    <!-- END - Item Navigation Header -->
+                    <!-- START - مطالب و محتوا -->
+                    <li>
+                        <a href="#"><i class="icon-bookmark" style="color:#1ABC9C"></i><span style="color:#fff">کارتابل</span></a>
+
+                        <ul>
+                            <li>
+                                <a asp-controller="Payment" asp-action="Payment"><i class="icon-bag"></i> <span>شارژ کیف پول</span></a>
+
+                            </li>
+                             <li>
+                               <a asp-controller="Transaction" asp-action="Index"><i class="icon-bag"></i><span>تراکنش های مالی</span></a>
+                            </li>
+                           @* <li>
+                                <a href="#"><i class="icon-envelop"></i> <span>امانات</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-forrst"></i> <span>امانات</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-forrst2"></i> <span>امانات</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-notebook"></i> <span>امانات</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-book3"></i> <span>امانات</span></a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-reminder"></i> <span>امانات</span></a>
+                            </li>*@
+                        </ul>
+                    </li>
+                    @*<li>
+                        <a href="#"><i class="icon-forward" style="color:#1ABC9C"></i><span style="color:#fff">کتابها</span></a>
+
+                        <ul>
+                            <li>
+                                <a href="#"><i class="icon-forward2"></i><span>کتاب</span></a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-grab"></i><span>کتاب</span></a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="icon-notebook"></i><span>کتاب</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-repo-forked"></i><span>کتاب</span></a>
+                            </li>
+                        </ul>
+                    </li>*@
+                   
+                    <li>
+                        <a href="#"><i class="icon-forward" style="color:#1ABC9C"></i><span style="color:#fff">عملیات</span></a>
+
+                        <ul>
+                             <li>
+                               <a asp-controller="ChangePassword" asp-action="Index"><i class="icon-key"></i>تغییر کلمه عبور</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                   
+
+                </ul>
+                <!-- END - Item Navigation -->
+
+            </div>
+        </div>
+        <!-- END - Main navigation -->
+
+    </div>
+</div>

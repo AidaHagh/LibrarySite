@@ -1,0 +1,83 @@
+﻿@inject UserManager<ApplicationUsers> userManager
+@inject IHttpContextAccessor htContextAccessor
+@{
+    //بدست آوردن اطلاعات کاربری که لاگین کرده
+    var userlogin = await userManager.GetUserAsync(htContextAccessor.HttpContext.User);
+}
+<style>
+    li {
+        text-wrap: nowrap;
+    }
+
+</style>
+
+
+<!--Header Start-->
+
+<header class="header fixed-top">
+
+    <a href="" class="logo"><img src="~/images/logo.jpg" alt=""></a>
+    @if (signInManager.IsSignedIn(User))
+    {
+
+        @Html.Partial("_sabadAmanat")
+
+    }
+    <nav>
+        <ul>
+            <li><a href="#home" style="font-size:18px">صفحه اصلی</a></li>
+            <li><a href="#about" style="font-size:18px">تماس با ما</a></li>
+            <li><a href="#service" style="font-size:18px">درباره ما</a></li>
+            @if (!signInManager.IsSignedIn(User))
+            {
+                <li>
+                    <a asp-controller="Account" asp-action="Register"
+                       style="font-size:18px"><i class="fa fa-user-plus"></i></a>
+                </li>
+            }
+            @*            @if (signInManager.IsSignedIn(User))
+            {
+            <li>
+            <a class="btn btn-light" asp-controller="Account" asp-action="Login"
+            style="font-size:18px;border: 1px solid #d2d2d2;border-radius: 4px;">
+            @userlogin.FirstName @userlogin.LastName
+            </a>
+
+            </li>
+
+            }
+            else
+            {*@
+            @if (signInManager.IsSignedIn(User))
+            {
+                <li>
+                    <a class="btn btn-light" asp-controller="Account" asp-action="Login"
+                       style="font-size:12px;border: 4px solid #e6f0f7;border-radius: 4px;text-wrap: nowrap;    background-color: #e7ecf0;
+                       color: black;">
+                        <span>@userlogin.FirstName </span> <span>@userlogin.LastName</span>
+                    </a>
+
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a class="btn btn-light" asp-controller="Account" asp-action="Login"
+                       style="font-size:18px;border: 1px solid #d2d2d2;border-radius: 4px;">
+                        <i class="fa fa-sign-in"> ورود </i>
+                    </a>
+
+                </li>
+            }
+
+
+
+        </ul>
+    </nav>
+
+
+
+    <div class="fas fa-bars"></div>
+
+</header>
+<!--Header End-->

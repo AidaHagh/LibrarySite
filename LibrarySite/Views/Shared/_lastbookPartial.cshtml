@@ -1,0 +1,20 @@
+﻿
+@model IEnumerable<EntityLayer.Entities.Book>
+<!--Last Book Start-->
+
+<section id="project" class="project">
+    <h1 class="heading">جدیدترین کتابها</h1>
+    <div class="box-container">
+            @foreach (var item in Model)
+            {
+                <div class="box">
+                <a asp-area="AdminArea" asp-controller="Book" asp-action="BookDetails" asp-route-BookId="@item.BookId">
+                <img src="/upload/book/@item.BookImage" alt="">
+            </a>
+            </div>
+            }
+    </div>
+
+</section>
+
+<!--Last Book End-->

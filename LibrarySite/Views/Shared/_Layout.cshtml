@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - مدیریت کتابخانه</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    @*<link rel="stylesheet" href="~/LibraryWebSystem.styles.css" asp-append-version="true" />*@
+    @* bootstrapt links*@
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/libStyle.css">
+    <link rel="stylesheet" href="~/css/customStyle.css">
+    <!--Notify-->
+    <link rel="stylesheet" href="~/css/plugins.css">
+    <link rel="stylesheet" href="~/css/notifications.css">
+</head>
+<body dir="rtl">
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*JavaScript Site*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>*@
+    <script src="./js/libMain.js"></script>
+    <!--Notify-->
+    <script src="~/js/notifications.js"></script>
+    <script src="~/js/custom.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <partial name="_SiteMessages" />
+</body>
+</html>

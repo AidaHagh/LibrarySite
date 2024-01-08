@@ -1,0 +1,127 @@
+﻿@model IEnumerable<EntityLayer.Entities.Book>
+@{
+    ViewData["Title"] = " لیست کتاب ها";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+
+    BookSearchTypeModel book = new BookSearchTypeModel();
+    book.Id = ViewBag.searchTypeselected;
+   List<BookSearchTypeModel> bookSearchType = book.GetBookTypeModel();
+}
+@{
+    int counter = 1;
+}
+
+<style>
+    tr:hover td {
+        background-color: #dcd6d6;
+    }
+</style>
+
+<div class="content">
+
+    <form asp-controller="Book" asp-action="SearchBook">
+        <div class="panel panel-heading col-md-12 col-xs-12"
+             style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+
+            <span style="font-weight:bold;" class="col-md-6 col-xs-12">
+                <i class="icon-user"></i>
+                لیست کتاب ها
+            </span>
+        </div>
+
+        <div class="panel col-md-12 chearchStyle">
+            <span style="margin-bottom:5px;"> جستجو بر اساس :</span>
+            <select asp-for="@book.Id" style="border:1px solid gray; margin-bottom:5px;" id="searchTypeselected" name="searchTypeselected"
+                    asp-items="@(new SelectList(bookSearchType,"Id","Title"))">
+            </select>
+            <input type="text" id="inputsearch" name="inputsearch" value="@ViewBag.inputsearch" class="inputSearch" />
+
+            <button type="submit">
+                جستجو
+                <i class="icon-search4"></i>
+            </button>
+
+        </div>
+    </form>
+
+    <div style="margin-bottom:5px;">
+        <a class="btn customGreen1" asp-controller="Book" asp-action="Create">
+            <i class="glyphicon glyphicon-plus"></i>
+            افزودن کتاب
+        </a>
+    </div>
+
+    <div>
+        <div class="table-responsive"
+             style=" overflow:auto; border:1px solid gray; border-radius:2px; box-shadow:3px 3px 1px 0 gray;">
+            <table class="table table-bordered" style="background-color:white;">
+                <thead>
+                    <tr style="font-size:14px; font-weight:bold; background-color:#D0ECE7;">
+                        <td>ردیف</td>
+                        <td>نام کتاب</td>
+                        <td>تعداد صفحات</td>
+                        <td>قیمت امانت (تومان)</td>
+                        <td>نویسنده</td>
+                        <td>دسته بندی </td>
+                        <td>تصویر کتاب</td>
+                        <td style="width:220px;">عملیات</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="font-size:12px;">
+                            <td style="width:60px; text-align:center;">@counter</td>
+                            <td style="text-align:right;">@item.BookName</td>
+                            <td>@item.BookPageCount</td>
+                            <td>@item.Price</td>
+                            <td>@item.Author.AuthorName</td>
+                            <td>@item.Group.GroupName</td>
+                            <td style="padding:2px;text-align:center">
+                                <img src="~/upload/book/@item.BookImage" style="width:60px;height:65px;">
+                            </td>
+                    
+                            <td>
+                                <div class="row">
+
+                                    <a asp-controller="Book" asp-action="Edit" asp-route-id="@item.BookId"
+                                       style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                       class="btn customBlue2" title="ویرایش">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                    </a>
+
+                                    <a asp-controller="Book" asp-action="Delete" asp-route-bookId="@item.BookId"
+                                       data-toggle="modal" data-target="#modal-action"
+                                       style="height:30px; width:40px; font-size:10px; margin-bottom:3px;"
+                                       class="btn customRed1">
+                                        <i class="glyphicon glyphicon-trash " title="حذف"></i>
+                                    </a>
+
+                                    <a asp-controller="Book" asp-action="BookDetails" asp-route-BookId="@item.BookId"
+                                       style="height:30px; width:40px; font-size:9px; margin-bottom:3px;"
+                                       class="btn customGreen1" title="مشخصات کتاب">
+                                        <i class="glyphicon glyphicon-book"></i>
+                                    </a>
+                                </div>
+
+                            </td>
+                        </tr>
+                        counter++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<partial name="_bookPaging" />
+
+
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", Size = BootstrapModel.ModalSize.Medium })
+
+@section AdminScripts{
+    <script src="~/js/modal/modal.js"></script>
+    }
+

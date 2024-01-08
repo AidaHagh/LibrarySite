@@ -1,0 +1,22 @@
+﻿<div class="page-header">
+    <div class="page-header-content">
+        <div style="padding-top:10px;">
+           
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+            <li class="active">پیشخوان</li>
+        </ul>
+
+        <div>
+            <div style="float:left;font-weight:bold; margin-left:50px;margin-top:10px"> 
+                <span style="font-weight:bold">@ConvertDateTime.ConvertMiladiToShamsi(DateTime.Now,"yyyy/MM/dd")</span>
+                <i class="glyphicon glyphicon-calendar"></i>
+            </div>
+        </div>
+       
+    </div>
+</div>
